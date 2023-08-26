@@ -1,9 +1,11 @@
 package com.example.models
 
 import org.jetbrains.exposed.sql.Table
+import java.io.Serializable
 import java.util.concurrent.atomic.AtomicInteger
 
-data class Article(val id: Int, var title: String, var body: String) {
+// make it serializable for making it cacheable
+data class Article(val id: Int, var title: String, var body: String): Serializable {
 //    companion object {
 //        private val idCounter = AtomicInteger() //thread safe data structure
 //

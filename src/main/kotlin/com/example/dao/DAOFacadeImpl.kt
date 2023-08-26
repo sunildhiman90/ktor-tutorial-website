@@ -52,10 +52,10 @@ class DAOFacadeImpl : DAOFacade {
 }
 
 // lets add a sample article to be inserted into the database before the application is started
-val dao: DAOFacade = DAOFacadeImpl().apply {
-    runBlocking {
-        if(allArticles().isEmpty()) {
-            addNewArticle("The drive to develop!", "...it's what keeps me going.")
-        }
-    }
-}
+//val dao: DAOFacade = DAOFacadeImpl().apply {
+//    runBlocking {
+//        if(allArticles().isEmpty()) {
+//            addNewArticle("The drive to develop!", "...it's what keeps me going.")
+//        }
+//    }
+//}
