@@ -11,7 +11,9 @@ fun main(args: Array<String>) {
 fun Application.module() {
     val driverClassName = environment.config.propertyOrNull("database.driverClassName")?.getString()
     val jdbcURL = environment.config.propertyOrNull("database.jdbcURL")?.getString()
-    DatabaseFactory.init(driverClassName, jdbcURL)
+    val username = environment.config.propertyOrNull("database.username")?.getString()
+    val password = environment.config.propertyOrNull("database.password")?.getString()
+    DatabaseFactory.init(driverClassName, jdbcURL, username, password)
     configureTemplating()
     configureSerialization()
     configureRouting()

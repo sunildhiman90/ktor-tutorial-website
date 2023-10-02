@@ -29,7 +29,7 @@ object DatabaseFactory {
 
     })
 
-    fun init(driverClassName: String?, jdbcURL: String?) {
+    fun init(driverClassName: String?, jdbcURL: String?, username: String?, password: String?) {
         require(driverClassName?.isNotEmpty() == true) {
             "driverClassName cannot be empty"
         }
@@ -37,12 +37,20 @@ object DatabaseFactory {
             "jdbcUrl cannot be empty"
         }
 
-        if (driverClassName != null && jdbcURL != null) {
+        require(username?.isNotEmpty() == true) {
+            "username cannot be empty"
+        }
+
+        require(password?.isNotEmpty() == true) {
+            "password cannot be empty"
+        }
+
+        if (driverClassName != null && jdbcURL != null && username != null && password != null) {
             val hikariDataSource = createHikariDataSource(
                 jdbcURL,
                 driverClassName,
-                username = "blogdb_user",
-                password = "skdktorblogapp@mysq281290"
+                username = username,
+                password = password
             )
             val database = Database.connect(datasource = hikariDataSource)
 
