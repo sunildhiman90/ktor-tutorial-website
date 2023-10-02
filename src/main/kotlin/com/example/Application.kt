@@ -3,7 +3,6 @@ package com.example
 import com.example.dao.DatabaseFactory
 import com.example.plugins.*
 import io.ktor.server.application.*
-import org.h2.engine.Database
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)

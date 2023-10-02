@@ -13,14 +13,20 @@ object DatabaseFactory {
 
     private fun createHikariDataSource(
         url: String,
-        driver: String
+        driver: String,
+        username: String,
+        password: String
     ) = HikariDataSource(HikariConfig().apply {
         driverClassName = driver
         jdbcUrl = url
-        maximumPoolSize = 3
+        maximumPoolSize = 10
+        this.username = username
+        this.password = password
         isAutoCommit = false
         transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         validate()
+    }.apply {
+
     })
 
     fun init(driverClassName: String?, jdbcURL: String?) {
@@ -31,15 +37,21 @@ object DatabaseFactory {
             "jdbcUrl cannot be empty"
         }
 
-        if(driverClassName != null && jdbcURL != null) {
-            val hikariDataSource = createHikariDataSource(jdbcURL, driverClassName)
+        if (driverClassName != null && jdbcURL != null) {
+            val hikariDataSource = createHikariDataSource(
+                jdbcURL,
+                driverClassName,
+                username = "blogdb_user",
+                password = "skdktorblogapp@mysq281290"
+            )
             val database = Database.connect(datasource = hikariDataSource)
+
+            //val database = Database.connect(datasource = hikariDataSource)
             //val database = Database.connect(jdbcURL, driverClassName)
             /**
              * Note that the Database.connect function doesn't establish a real database connection
              * until you call the transaction, it only creates a descriptor for future connections.
              */
-
             //blocking transaction
             transaction(database) {
                 SchemaUtils.create(Articles)

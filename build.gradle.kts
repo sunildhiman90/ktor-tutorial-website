@@ -28,6 +28,7 @@ val h2_version: String by project
 
 val hikaricp_version: String by project
 val ehcache_version: String by project
+val mysql_connector_version: String by project
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm")
@@ -44,10 +45,14 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("com.h2database:h2:$h2_version")
+
+    implementation("mysql:mysql-connector-java:$mysql_connector_version")
+    //implementation("com.h2database:h2:$h2_version")
 
     //connection pooling and cache, becoz by default exposed make new connection every time when make transaction. TO prevent that we use connection pooling
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
     implementation("org.ehcache:ehcache:$ehcache_version")
+
+
 
 }
